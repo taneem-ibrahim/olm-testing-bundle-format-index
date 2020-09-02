@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: custom
+  namespace: openshift-marketplace
+spec:
+  sourceType: grpc
+  image: quay.io/taneem/foobar-operator-index:0.0.1

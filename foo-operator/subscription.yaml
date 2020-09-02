@@ -1,0 +1,10 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: foobar-subscription
+  namespace: openshift-marketplace 
+spec:
+  channel: alpha
+  name: foobar-operator
+  source: custom
+  sourceNamespace: openshift-marketplace
