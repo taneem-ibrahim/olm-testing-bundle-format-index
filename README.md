@@ -1,7 +1,7 @@
 # olm-testing-bundle-format-index
 A simple OLM integraion testing operator for the bundle format with opm
 
-Bundle Format Operator Directory Strcuture:
+**Bundle Format Operator Directory Structure**
 
 ```
 foo-operator % tree
@@ -20,31 +20,31 @@ foo-operator % tree
 └── subscription.yaml
 ```
 
-Let's build and push the operator bundle as an image:
+**Let's build and push the operator bundle as an image**
 
 ```
-- docker build -f bundle.Dockerfile -t quay.io/taneem/foobar-operator:v0.0.1 .
+- docker build -f bundle.Dockerfile -t quay.io/<quay_username>/foobar-operator:v0.0.1 .
 - login to quay.io: docker login quay.io -u <quay_username>
 - docker push quay.io/taneem/foobar-operator:v0.0.1
 - Login to quay.io web portal and set the repository to public (under repository settings). 
 ```
 
-Let's validate the remote bundle-format image with operator-sdk (v1.0.0+):
+**Let's validate the remote bundle-format image with operator-sdk (v1.0.0+)**
 
 ```
 - operator-sdk bundle validate 
 - Note: if the validation is successful, then we should see only INFO level messages (no WARN or ERROR) in the output console and it should end with "All validation tests have completed successfully".
 ```
 
-Let's build and push a catalog index image for the operator:
+**Let's build and push a catalog index image for the operator**
 
 ```
-- opm index add --bundles quay.io/taneem/foobar-operator:v0.0.1 --tag quay.io/taneem/foobar-operator-index:0.0.1 --build-tool docker
-- docker push quay.io/taneem/foobar-operator-index:0.0.1
+- opm index add --bundles quay.io/taneem/foobar-operator:v0.0.1 --tag quay.io/<quay_username>/foobar-operator-index:0.0.1 --build-tool docker
+- docker push quay.io/<quay_username>/foobar-operator-index:0.0.1
 - Login to quay.io on the web portal and set the repository to public.
 ```
 
-Create CatalogSource:
+**Create CatalogSource**
 
 ```
 - oc create -f catalofsource.yaml
@@ -54,7 +54,7 @@ time="2020-09-02T23:10:08Z" level=info msg="Keeping server open for infinite sec
 time="2020-09-02T23:10:08Z" level=info msg="serving registry" database=/database/index.db port=50051
 ```
 
-Create Subscription:
+**Create Subscription**
 
 
 - Let's get the operator package name: 
@@ -75,6 +75,8 @@ oc get packagemanifests foobar-operator -o jsonpath='{.status.defaultChannel}'
 - oc create -f subscription.yaml
 ```
 
+**Install Operator from OperatorHub**
+
 Now if we go to the OperatorHub in our local OpenShift cluster console, we can see our foobar operator listed. It can also be filtered by resource type "custom" on the left hand side. 
 
 The bundle-format foobar-operator is now ready to be installed. We can validate the installation by checking the operator pod logs and looking for the echo message "v0.0.1":
@@ -84,6 +86,6 @@ oc logs -f foobar-operator-controller-manager-<> -n openshift-marketplace
 > v0.0.1
 ```
 
-Upgrade the operator bundle version and corresponding index image pointer:
+**Upgrade the operator bundle version and corresponding index image pointer**
 
-
+_coming soon_
