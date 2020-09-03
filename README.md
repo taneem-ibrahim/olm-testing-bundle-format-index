@@ -77,6 +77,13 @@ oc get packagemanifests foobar-operator -o jsonpath='{.status.defaultChannel}'
 
 Now if we go to the OperatorHub in our local OpenShift cluster console, we can see our foobar operator listed. It can also be filtered by resource type "custom" on the left hand side. 
 
-The bundle-format foobar-operator is now ready to be installed!
+The bundle-format foobar-operator is now ready to be installed. We can validate the installation by checking the operator pod logs and looking for the echo message "v0.0.1":
+
+```
+oc logs -f foobar-operator-controller-manager-<> -n openshift-marketplace
+> v0.0.1
+```
+
+Upgrade the operator bundle version and corresponding index image pointer:
 
 
