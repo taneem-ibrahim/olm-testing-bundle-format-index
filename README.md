@@ -1,5 +1,5 @@
 # olm-testing-bundle-format-index
-A simple OLM testing example for the bundle format with opm
+A simple OLM integraion testing operator for the bundle format with opm
 
 Bundle Format Operator Directory Strcuture:
 
