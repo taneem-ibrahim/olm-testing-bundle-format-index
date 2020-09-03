@@ -25,7 +25,7 @@ foo-operator % tree
 ```
 - docker build -f bundle.Dockerfile -t quay.io/<quay_username>/foobar-operator:v0.0.1 .
 - login to quay.io: docker login quay.io -u <quay_username>
-- docker push quay.io/taneem/foobar-operator:v0.0.1
+- docker push quay.io/<quay_username>/foobar-operator:v0.0.1
 - Login to quay.io web portal and set the repository to public (under repository settings). 
 ```
 
@@ -39,7 +39,7 @@ foo-operator % tree
 **Let's build and push a catalog index image for the operator**
 
 ```
-- opm index add --bundles quay.io/taneem/foobar-operator:v0.0.1 --tag quay.io/<quay_username>/foobar-operator-index:0.0.1 --build-tool docker
+- opm index add --bundles quay.io/<quay_username>/foobar-operator:v0.0.1 --tag quay.io/<quay_username>/foobar-operator-index:0.0.1 --build-tool docker
 - docker push quay.io/<quay_username>/foobar-operator-index:0.0.1
 - Login to quay.io on the web portal and set the repository to public.
 ```
