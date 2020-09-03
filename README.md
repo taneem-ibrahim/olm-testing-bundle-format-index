@@ -1,4 +1,5 @@
-# olm-testing-bundle-format-index
+# OLM integration Tests with an operator packaged in the [bundle format](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.5/html/operators/olm-packaging-format#olm-bundle-format_olm-packaging-format) and installed via [OPM](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.5/html/operators/olm-packaging-format#olm-opm_olm-packaging-format)
+
 A simple OLM integraion testing operator for the bundle format with opm
 
 **Bundle Format Operator Directory Structure**
