@@ -33,7 +33,7 @@ foo-operator % tree
 **Let's validate the remote bundle-format image with operator-sdk (v1.0.0+)**
 
 ```
-- operator-sdk bundle validate 
+- operator-sdk bundle validate quay.io/<quay_username>/foobar-operator:v0.0.1
 - Note: if the validation is successful, then we should see only INFO level messages (no WARN or ERROR) in the output console and it should end with "All validation tests have completed successfully".
 ```
 
