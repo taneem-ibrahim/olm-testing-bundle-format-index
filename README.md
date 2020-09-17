@@ -40,8 +40,8 @@ foo-operator % tree
 **Let's build and push a catalog index image for the operator**
 
 ```
-- opm index add --bundles quay.io/<quay_username>/foobar-operator:v0.0.1 --tag quay.io/<quay_username>/foobar-operator-index:0.0.1 --build-tool docker
-- docker push quay.io/<quay_username>/foobar-operator-index:0.0.1
+- opm index add --bundles quay.io/<quay_username>/foobar-operator:v0.0.1 --tag quay.io/<quay_username>/foobar-operator-index:latest --build-tool docker
+- docker push quay.io/<quay_username>/foobar-operator-index:latest
 - Login to quay.io on the web portal and set the repository to public.
 ```
 
@@ -89,4 +89,32 @@ oc logs -f foobar-operator-controller-manager-<> -n openshift-marketplace
 
 **Upgrade the operator bundle version and corresponding index image pointer**
 
-_coming soon_
+Upgrade the operator version
+
+We will do a simple operator upgrade test just by updating the operator version tag from “0.0.1” to “0.0.2” in the Catalog Service Version (CSV) file. Let’s run the following commands from the root directory of our foo-operator:
+
+```
+> sed -i 's/0.0.1/0.0.2/g' ./bundle/manifests/foobar-operator.clusterserviceversion.yaml
+```
+
+Next we will just repeat the step numbers 2 and 3 above to build and validate the new operator bundle image and substitute the image version tags to be 0.0.2 instead of 0.0.1 in the docker push commands.
+
+We are now ready to add the new operator version to the registry. We can do that via the `opm add` command. Notice how we are adding the upgraded operator version cumulatively by inserting the “from-index” parameter. Also note that we tagged the new index image with the “latest” tag. This will help us to update the catalog source to point to the latest version of our index image automatically.
+
+```
+opm index add --bundles quay.io/<quay_username>/foobar-operator:v0.0.2 --from-index quay.io/<quay_username>/foobar-operator-index:latest --tag quay.io/<quay_username>/foobar-operator-index:latest --build-tool docker
+```
+
+We will push this new version of the index image to quay:
+
+```
+docker push quay.io/$quay_username/foobar-operator-index:latest
+```
+
+The catalog source automatically polls for the latest version every 5 minutes. So after 5 minutes have passed, we can go to the operator hub console and validate the operator version 0.0.2 is available and then install it to the operator-marketplace namespace.
+
+```
+> oc logs -f foobar-operator-controller-manager-<pod_id> -n openshift-marketplace
+v0.0.2
+```
+
