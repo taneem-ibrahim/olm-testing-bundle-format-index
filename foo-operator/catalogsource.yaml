@@ -5,4 +5,8 @@ metadata:
   namespace: openshift-marketplace
 spec:
   sourceType: grpc
-  image: quay.io/taneem/foobar-operator-index:0.0.1
+  image: quay.io/taneem/foobar-operator-index:latest
+  displayName: Custom Catalog
+  updateStrategy:
+    registryPoll: 
+      interval: 5m
