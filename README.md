@@ -118,3 +118,8 @@ The catalog source automatically polls for the latest version every 5 minutes. S
 v0.0.2
 ```
 
+**Additional Comments**
+
+We can use ubi-8 for the base OS for our operator by changing the following in the operator metadata CSV file (foobar-operator.clusterserviceversion.yaml).
+
+> image: docker.io/busybox to image: registry.access.redhat.com/ubi8/ubi
